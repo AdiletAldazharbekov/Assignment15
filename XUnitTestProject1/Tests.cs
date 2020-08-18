@@ -23,6 +23,7 @@ namespace MyDictionaryTest
             var dictionary = new MyDictionary();
             dictionary.Add("1", "First");
             dictionary.Add("2", "Second");
+            dictionary.Add("1", "Third");
             var actual = dictionary.Lenght();
 
             Assert.Equal(expected, actual);
@@ -31,13 +32,19 @@ namespace MyDictionaryTest
         [Fact]
         public void GetValueTest()
         {
-            var expected = "First";
+            
+            
             var dictionary = new MyDictionary();
             dictionary.Add("1", "First");
+            dictionary.Add("2", "Second");
             
+            var expected = "First";
             var actual = dictionary.GetValue("1");
-
             Assert.Equal(expected, actual);
+
+            var expected2 = "Ключ \"3\" в базе не существует, попробуйте другой ключ.";
+            var actual2 = dictionary.GetValue("3");
+            Assert.Equal(expected2, actual2);
         }
 
         [Fact]
@@ -52,6 +59,11 @@ namespace MyDictionaryTest
             var actual = dictionary.Lenght();
 
             Assert.Equal(expected, actual);
+            
+            dictionary.Remove("2");
+            var expected2 = 2;
+            var actual2 = dictionary.Lenght();
+            Assert.Equal(expected2, actual2);
         }
 
         [Fact]

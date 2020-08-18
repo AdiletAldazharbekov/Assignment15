@@ -8,11 +8,17 @@ namespace Assignment15
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
 
             var dictionary = new MyDictionary();
             dictionary.Add("1", "First");
             dictionary.Add("2", "Second");
+            dictionary.Add("1", "Third");
+
+            Console.WriteLine(dictionary.GetValue("3"));
+
+            dictionary.Remove("3");
+
             dictionary.Print();
 
         }

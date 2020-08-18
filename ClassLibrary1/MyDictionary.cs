@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace DictionaryLibrary
 {
@@ -10,13 +12,31 @@ namespace DictionaryLibrary
 
         public void Add(string id, string name)
         {
-            var newMyDictionary = new string[myDictionary.GetLength(0)+1, 2];
-            for (int i = 0; i < newMyDictionary.GetLength(0); i++)
+            var isTrue = true;
+            for (int i = 0; i < myDictionary.GetLength(0); i++)
             {
-                newMyDictionary[i, 0] = id;
-                newMyDictionary[i, 1] = name;
+                if (id == myDictionary[i, 0])
+                {
+                    Console.WriteLine($"Ключ \"{id}\" существует в базе, попробуйте другой ключ.");
+                    isTrue = false;
+                    break;
+                }
             }
-            myDictionary = newMyDictionary;
+
+            if (isTrue)
+            {
+                var newMyDictionary = new string[myDictionary.GetLength(0) + 1, 2];
+
+                for (int i = 0; i < myDictionary.GetLength(0); i++)
+                {
+                    newMyDictionary[i, 0] = myDictionary[i, 0];
+                    newMyDictionary[i, 1] = myDictionary[i, 1];
+                }
+                    newMyDictionary[newMyDictionary.GetLength(0) - 1, 0] = id;
+                    newMyDictionary[newMyDictionary.GetLength(0) - 1, 1] = name;
+               
+                myDictionary = newMyDictionary;
+            }   
         }
 
 
@@ -24,7 +44,7 @@ namespace DictionaryLibrary
 
         public string GetValue(string id)
         {
-            var name = "Error";
+            var name = $"Ключ \"{id}\" в базе не существует, попробуйте другой ключ.";
             for (int i = 0; i < myDictionary.GetLength(0); i++)
             {
                 if (id == myDictionary[i, 0])
@@ -33,29 +53,39 @@ namespace DictionaryLibrary
                     break;
                 }
             }
-
             return name;
         }
+
+
+
+
+
         public void Remove(string id)
         {
-            var newMyDictionary = new string[myDictionary.GetLength(0) - 1, 2];
-            
-            for (int j = 0, i = 0; i < myDictionary.GetLength(0); i++)
+            var isTrue = true;
+            for (int i = 0; i < myDictionary.GetLength(0); i++)
             {
-               
                 if (id == myDictionary[i, 0])
                 {
-                    continue; 
+                    isTrue = false;
+                    break;
                 }
-                else
+            }
+            
+            if (isTrue) Console.WriteLine($"Ключ \"{id}\" в базе не существует и не был удален, попробуйте другой ключ.");
+            else 
+            {
+                var newMyDictionary = new string[myDictionary.GetLength(0) - 1, 2];
+                for (int j=0, i = 0; i < myDictionary.GetLength(0); i++)
                 {
+                    if (id == myDictionary[i, 0]) continue;
                     newMyDictionary[j, 0] = myDictionary[i, 0];
                     newMyDictionary[j, 1] = myDictionary[i, 1];
                     j++;
                 }
+                myDictionary = newMyDictionary;
             }
-            myDictionary = newMyDictionary;
-        }
+        }   
         public void Print()
         {
             foreach (var i in myDictionary)
