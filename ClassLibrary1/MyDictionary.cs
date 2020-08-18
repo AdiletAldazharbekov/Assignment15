@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace DictionaryLibrary
 {
     public class MyDictionary
     {
-        string [,] myDictionary = new string[0, 0];
+        private string[,] myDictionary = new string[0, 0];
+
         public int Lenght() => myDictionary.GetLength(0);
 
         public void Add(string id, string name)
@@ -32,15 +30,12 @@ namespace DictionaryLibrary
                     newMyDictionary[i, 0] = myDictionary[i, 0];
                     newMyDictionary[i, 1] = myDictionary[i, 1];
                 }
-                    newMyDictionary[newMyDictionary.GetLength(0) - 1, 0] = id;
-                    newMyDictionary[newMyDictionary.GetLength(0) - 1, 1] = name;
-               
+                newMyDictionary[newMyDictionary.GetLength(0) - 1, 0] = id;
+                newMyDictionary[newMyDictionary.GetLength(0) - 1, 1] = name;
+
                 myDictionary = newMyDictionary;
-            }   
+            }
         }
-
-
-
 
         public string GetValue(string id)
         {
@@ -56,10 +51,6 @@ namespace DictionaryLibrary
             return name;
         }
 
-
-
-
-
         public void Remove(string id)
         {
             var isTrue = true;
@@ -71,12 +62,12 @@ namespace DictionaryLibrary
                     break;
                 }
             }
-            
+
             if (isTrue) Console.WriteLine($"Ключ \"{id}\" в базе не существует и не был удален, попробуйте другой ключ.");
-            else 
+            else
             {
                 var newMyDictionary = new string[myDictionary.GetLength(0) - 1, 2];
-                for (int j=0, i = 0; i < myDictionary.GetLength(0); i++)
+                for (int j = 0, i = 0; i < myDictionary.GetLength(0); i++)
                 {
                     if (id == myDictionary[i, 0]) continue;
                     newMyDictionary[j, 0] = myDictionary[i, 0];
@@ -85,13 +76,12 @@ namespace DictionaryLibrary
                 }
                 myDictionary = newMyDictionary;
             }
-        }   
+        }
+
         public void Print()
         {
-            foreach (var i in myDictionary)
-            {
-                Console.WriteLine(i);
-            };
+            for (int i = 0; i < myDictionary.GetLength(0); i++)
+                Console.WriteLine($"{myDictionary[i, 0]}\t{myDictionary[i, 1]}");
         }
     }
 }

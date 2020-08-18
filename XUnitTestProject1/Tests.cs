@@ -1,12 +1,11 @@
-using System;
-using Xunit;
 using DictionaryLibrary;
+using Xunit;
 
 namespace MyDictionaryTest
 {
     public class Tests
     {
-        [Fact]        
+        [Fact]
         public void InitializingTest()
         {
             var expected = 0;
@@ -32,12 +31,10 @@ namespace MyDictionaryTest
         [Fact]
         public void GetValueTest()
         {
-            
-            
             var dictionary = new MyDictionary();
             dictionary.Add("1", "First");
             dictionary.Add("2", "Second");
-            
+
             var expected = "First";
             var actual = dictionary.GetValue("1");
             Assert.Equal(expected, actual);
@@ -59,7 +56,7 @@ namespace MyDictionaryTest
             var actual = dictionary.Lenght();
 
             Assert.Equal(expected, actual);
-            
+
             dictionary.Remove("2");
             var expected2 = 2;
             var actual2 = dictionary.Lenght();

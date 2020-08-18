@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using DictionaryLibrary;
+﻿using DictionaryLibrary;
+using System;
 
 namespace Assignment15
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
-
             var dictionary = new MyDictionary();
             dictionary.Add("1", "First");
             dictionary.Add("2", "Second");
@@ -30,11 +27,8 @@ namespace Assignment15
 
             dictionary.Remove("5");
 
-
             Console.WriteLine();
             dictionary.Print();
-
         }
-
     }
 }
