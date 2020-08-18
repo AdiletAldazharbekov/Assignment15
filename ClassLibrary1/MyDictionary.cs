@@ -58,7 +58,10 @@ namespace DictionaryLibrary
         }
         public void Print()
         {
-
+            foreach (var i in myDictionary)
+            {
+                Console.WriteLine(i);
+            };
         }
     }
 }
